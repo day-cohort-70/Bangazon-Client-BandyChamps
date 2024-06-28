@@ -14,30 +14,38 @@ export default function Register() {
   const lastName = useRef('')
   const username = useRef('')
   const password = useRef('')
+  const email = useRef('')  // Added email ref
   const router = useRouter()
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
 
     const user = {
       username: username.current.value,
       password: password.current.value,
       first_name: firstName.current.value,
-      last_name: lastName.current.value
+      last_name: lastName.current.value,
+      email: email.current.value  // Added email to the user object
     }
 
-    register(user).then((res) => {
-      if (res.token) {
+    try {
+      const res = await register(user); // Await the register call
+
+      if (res && res.token) {
         setToken(res.token)
         router.push('/')
+      } else {
+        console.error("Registration failed: No token received");
       }
-    })
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
   }
 
   return (
     <div className="columns is-centered">
       <div className="column is-half">
-        <form className="box">
+        <form className="box" onSubmit={submit}>
           <h1 className="title">Welcome!</h1>
           <Input
             id="firstName"
@@ -51,7 +59,12 @@ export default function Register() {
             type="text"
             label="Last Name"
           />
-
+          <Input
+            id="email"  // Added email input field
+            refEl={email}
+            type="email"
+            label="Email"
+          />
           <Input
             id="username"
             refEl={username}
@@ -64,14 +77,13 @@ export default function Register() {
             type="password"
             label="Password"
           />
-
           <div className="field is-grouped">
             <div className="control">
-              <button className="button is-link" onClick={submit}>Submit</button>
+              <button className="button is-link" type="submit">Submit</button>
             </div>
             <div className="control">
               <Link href="/login">
-                <button className="button is-link is-light">Cancel</button>
+                <button className="button is-link is-light" type="button">Cancel</button>
               </Link>
             </div>
           </div>

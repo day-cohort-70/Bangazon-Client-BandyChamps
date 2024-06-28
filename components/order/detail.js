@@ -7,13 +7,13 @@ export default function CartDetail({ cart, removeProduct }) {
   return (
     <Table headers={headers} footers={footers}>
       {
-        cart.products?.map(product => {
+        cart.lineitems?.map(item => {
           return (
-            <tr key={product.id}>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
+            <tr key={item.id}>
+              <td>{item.product.name}</td>
+              <td>{item.product.price}</td>
               <td>
-                <span className="icon is-clickable" onClick={() => removeProduct(product.id)}>
+                <span className="icon is-clickable" onClick={() => removeProduct(item.id)}>
                   <i className="fas fa-trash"></i>
                 </span>
               </td>

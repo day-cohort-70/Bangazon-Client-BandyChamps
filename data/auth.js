@@ -14,7 +14,7 @@ export function login(user) {
 
 
 export function register(user) {
-  debugger
+  
   return fetchWithResponse('register', { 
     method: 'POST',
     headers: {

@@ -6,14 +6,14 @@ const checkError = (res) => {
   }
   return res
 }
-
 const checkErrorJson = (res) => {
-  if (res.status !== 200 || 201) {   // added 201
+  if (res.status !== 200 && res.status !== 201) {
     throw Error(res.status);
   } else {
-    return res.json()
+    return res.json();
   }
 }
+
 
 
 const catchError = (err) => {

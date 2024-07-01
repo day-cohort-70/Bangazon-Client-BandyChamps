@@ -14,7 +14,9 @@ export default function Register() {
   const lastName = useRef('')
   const username = useRef('')
   const password = useRef('')
-  const email = useRef('')  // Added email ref
+  const email = useRef('')
+  const address = useRef('')
+  const phoneNumber = useRef('')
   const router = useRouter()
 
   const submit = async (e) => {
@@ -25,12 +27,17 @@ export default function Register() {
       password: password.current.value,
       first_name: firstName.current.value,
       last_name: lastName.current.value,
-      email: email.current.value  // Added email to the user object
+      email: email.current.value,
+      address: address.current.value,
+      phone_number: phoneNumber.current.value
     }
+    console.log("User data to send:", user);
 
     try {
       const res = await register(user); // Await the register call
-
+      // console.log("Received registration request:", res);
+      // console.log("Backend response:", res);
+debugger
       if (res && res.token) {
         setToken(res.token)
         router.push('/')
@@ -60,10 +67,22 @@ export default function Register() {
             label="Last Name"
           />
           <Input
-            id="email"  // Added email input field
+            id="email"
             refEl={email}
             type="email"
             label="Email"
+          />
+          <Input
+            id="address"
+            refEl={address}
+            type="text"
+            label="Address"
+          />
+          <Input
+            id="phoneNumber"
+            refEl={phoneNumber}
+            type="text"
+            label="Phone Number"
           />
           <Input
             id="username"

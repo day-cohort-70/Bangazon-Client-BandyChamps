@@ -37,7 +37,6 @@ export default function Register() {
       const res = await register(user); // Await the register call
       // console.log("Received registration request:", res);
       // console.log("Backend response:", res);
-debugger
       if (res && res.token) {
         setToken(res.token)
         router.push('/')

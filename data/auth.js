@@ -1,3 +1,5 @@
+// data/auth.js
+
 import { fetchWithResponse } from "./fetcher"
 
 export function login(user) {
@@ -10,8 +12,10 @@ export function login(user) {
   })
 }
 
+
 export function register(user) {
-  return fetchWithResponse('register', {
+  
+  return fetchWithResponse('register', { 
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

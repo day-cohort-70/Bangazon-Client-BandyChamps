@@ -61,19 +61,19 @@ export default function Filter({ productCount, onSearch, locations }) {
 
   const buildQuery = (key, value) => {
     if (value && value !== "0") {
-      return `${key}=${value}&`
+      return `${key}=${value}&`;
     }
-    return ""
+    return "";
   }
-
+  
   const filter = () => {
-    const newQuery = ""
+    let newQuery = ""; // Initialize as an empty string
     for (let refEl in refEls) {
-      newQuery += buildQuery(refEl, refEls[refEl].current.value)
+      newQuery += buildQuery(refEl, refEls[refEl].current.value);
     }
-    setQuery(newQuery)
+    setQuery(newQuery);
   }
-
+  
   return (
     <div className='level'>
       <div className="level-left">

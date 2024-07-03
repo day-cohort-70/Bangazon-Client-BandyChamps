@@ -40,7 +40,24 @@ async function addProductToOrder(productId) {
   }
 }                                                                     
 // ! 
+// Define the recommendProductEvent function
+async function recommendProductEvent() {
+  try {
+    const username = usernameEl.current.value;
+    const response = await recommendProduct(product.id, username);
+    
+    if (!response.ok) {
+      setShowError(true);
+      throw new Error('User does not exist');
+    }
 
+    setShowError(false);
+    setShowModal(false);
+    console.log('Product recommended successfully');
+  } catch (error) {
+    console.error('Error recommending product:', error);
+  }
+}
   return (
     <>
       <Modal setShowModal={setShowModal} showModal={showModal} title="Recommend this product to a user">
@@ -50,7 +67,7 @@ async function addProductToOrder(productId) {
           }
         </Input>
         <>
-          <button className="button is-success" onClick={recommendProduct}>Recommend Product</button>   
+          <button className="button is-success" onClick={recommendProductEvent}>Recommend Product</button>   
           <button className="button" onClick={() => setShowModal(false)}>Cancel</button>
         </>
       </Modal>
